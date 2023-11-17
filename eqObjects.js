@@ -28,8 +28,13 @@ const eqObjects = function(obj1, obj2) {
   if (keys1.length !== keys2.length) return false;
 
   for (let i = 0; i < keys1.length; i++) {
-    if (Array.isArray(obj1[keys1[i]]) && Array.isArray(obj2[keys1[i]])) {
-      if (!eqArrays(obj1[keys1[i]], obj2[keys1[i]])) return false;
+    // if (Array.isArray(obj1[keys1[i]]) && Array.isArray(obj2[keys1[i]])) {
+    //   if (!eqArrays(obj1[keys1[i]], obj2[keys1[i]])) return false;
+    // } else {
+    //   if (obj1[keys1[i]] !== obj2[keys1[i]]) return false;
+    // }
+    if (typeof obj1[keys1[i]] === "object" && !Array.isArray(obj1[keys1[i]])) {
+      if (!eqObjects(obj1[keys1[i]], obj2[keys1[i]])) return false;
     } else {
       if (obj1[keys1[i]] !== obj2[keys1[i]]) return false;
     }
@@ -57,3 +62,7 @@ eqObjects(multiColorShirtObject, longSleeveMultiColorShirtObject);
 
 assertEqual(eqObjects(multiColorShirtObject, anotherMultiColorShirtObject), true);
 assertEqual(eqObjects(multiColorShirtObject, longSleeveMultiColorShirtObject), false);
+
+assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true);
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false);
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false);
