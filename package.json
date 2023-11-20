@@ -1,7 +1,7 @@
 {
-  "name": "lotide",
+  "name": "@mascott226/lotide",
   "version": "1.0.0",
-  "description": "",
+  "description": "@mascott226",
   "main": "assertArraysEqual.js",
   "directories": {
     "test": "test"
@@ -9,6 +9,6 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
+  "author": "mascott226",
   "license": "ISC"
 }
